@@ -194,3 +194,22 @@ function createOverlayFromImageData(imageData, canvas) {
   const ctx = canvas.getContext("2d");
   ctx.putImageData(imageData, 0, 0);
 }
+
+// Download overlay image
+function downloadOverlayImage() {
+  const link = document.createElement("a");
+  const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, "-");
+  link.download = `image-comparison-overlay-${timestamp}.png`;
+  link.href = overlayCanvas.toDataURL("image/png");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Initialize download button
+window.addEventListener("load", () => {
+  const downloadButton = document.getElementById("download-overlay");
+  if (downloadButton) {
+    downloadButton.addEventListener("click", downloadOverlayImage);
+  }
+});

@@ -1,45 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Compare</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Image Compare Tool - Free Online Visual Difference Detector</title>
+    <meta
+      name="description"
+      content="Compare two images to detect visual differences. Free online tool to analyse pixel changes, calculate difference percentages, and generate overlay images. Perfect for quality control, design reviews, and visual regression testing."
+    />
+    <meta
+      name="keywords"
+      content="image compare, visual diff, image difference, before after comparison, pixel analysis, quality control, design review, regression testing, free tool"
+    />
+    <meta name="author" content="Mark Brady" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FFBF00" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Image Compare Tool - Free Online Visual Difference Detector"
+    />
+    <meta
+      property="og:description"
+      content="Compare two images to detect visual differences. Free online tool to analyse pixel changes and generate overlay images highlighting modifications."
+    />
+    <meta
+      property="og:url"
+      content="https://inkyvoxel.github.io/image-compare/"
+    />
+    <meta property="og:site_name" content="Image Compare Tool" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Image Compare Tool - Free Online Visual Difference Detector"
+    />
+    <meta
+      name="twitter:description"
+      content="Compare two images to detect visual differences. Free online tool for quality control and design reviews."
+    />
+    <meta name="twitter:creator" content="@inkyvoxel" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://inkyvoxel.github.io/image-compare/" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Image Compare Tool",
+        "description": "Free online tool to compare two images and detect visual differences",
+        "url": "https://inkyvoxel.github.io/image-compare/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "GBP"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "Mark Brady",
+          "url": "https://www.inkyvoxel.com"
+        }
+      }
+    </script>
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css"
     />
   </head>
   <body>
-    <main class="container">
-      <h1>Image Compare</h1>
-      <form>
-        <div>
-          <label for="before">Before Image:</label>
-          <input type="file" id="before" accept="image/*" required />
-        </div>
-        <div>
-          <label for="after">After Image:</label>
-          <input type="file" id="after" accept="image/*" required />
-        </div>
-        <button type="submit" id="compare">Compare</button>
-      </form>
-      <div id="result" style="display: none">
-        <h2>Results</h2>
-        <p id="percentage"></p>
-        <figure>
-          <canvas id="overlay"></canvas>
-          <figcaption>
-            Difference overlay (differences shown in color)
-          </figcaption>
-        </figure>
-      </div>
+    <header>
+      <nav class="container" aria-label="Main navigation">
+        <ul>
+          <li><strong>Image Compare Tool</strong></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container" role="main">
+      <article>
+        <header>
+          <h1>Image Compare Tool</h1>
+          <p>
+            Compare two images side-by-side to detect visual differences. Upload
+            before and after photos to analyse pixel changes, calculate
+            difference percentages, and generate downloadable overlay images
+            highlighting modifications. Perfect for quality control, design
+            reviews, and visual regression testing.
+          </p>
+        </header>
+
+        <section aria-labelledby="upload-heading">
+          <h2 id="upload-heading">Upload Images</h2>
+          <form role="form" aria-label="Image comparison form">
+            <div>
+              <label for="before">Before Image:</label>
+              <input
+                type="file"
+                id="before"
+                accept="image/*"
+                required
+                aria-describedby="before-help"
+              />
+              <small id="before-help"
+                >Upload the original or reference image</small
+              >
+            </div>
+            <div>
+              <label for="after">After Image:</label>
+              <input
+                type="file"
+                id="after"
+                accept="image/*"
+                required
+                aria-describedby="after-help"
+              />
+              <small id="after-help"
+                >Upload the modified or comparison image</small
+              >
+            </div>
+            <button type="submit" id="compare">Compare Images</button>
+          </form>
+        </section>
+
+        <section
+          id="result"
+          style="display: none"
+          aria-labelledby="results-heading"
+        >
+          <header>
+            <h2 id="results-heading">Comparison Results</h2>
+          </header>
+          <p id="percentage" aria-live="polite"></p>
+          <figure>
+            <canvas id="overlay" aria-label="Image difference overlay"></canvas>
+            <figcaption>
+              Difference overlay (differences shown in red)
+            </figcaption>
+          </figure>
+          <button
+            type="button"
+            id="download-overlay"
+            class="secondary"
+            aria-describedby="download-help"
+          >
+            Download Overlay 💾
+          </button>
+          <small id="download-help"
+            >Save the overlay image to your device</small
+          >
+        </section>
+      </article>
     </main>
-    <footer class="container">
-      <p>
-        Made by
-        <a href="https://www.inkyvoxel.com" target="_blank">inkyvoxel</a> ⬛
-      </p>
+
+    <footer class="container" role="contentinfo">
+      <nav aria-label="Footer navigation">
+        <ul>
+          <li>
+            Made by
+            <a
+              href="https://www.inkyvoxel.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              >inkyvoxel</a
+            >
+            ⬛
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <small
+              ><a
+                href="https://github.com/inkyvoxel/image-compare"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View on GitHub</a
+              ></small
+            >
+          </li>
+        </ul>
+      </nav>
     </footer>
+
     <script src="js/script.js"></script>
   </body>
 </html>
