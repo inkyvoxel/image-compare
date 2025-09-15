@@ -5,6 +5,12 @@ const resultDiv = document.getElementById("result");
 const percentageEl = document.getElementById("percentage");
 const overlayCanvas = document.getElementById("overlay");
 
+window.addEventListener("load", () => {
+  beforeInput.value = "";
+  afterInput.value = "";
+  resultDiv.style.display = "none";
+});
+
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
   const beforeFile = beforeInput.files[0];
