@@ -1,4 +1,4 @@
-# Image Compare
+# Image Compare Tool 🔍
 
 A simple web app to compare two images, calculate the percentage of differing pixels, and display a difference overlay. Perfect for quality control, design reviews, and visual regression testing.
 

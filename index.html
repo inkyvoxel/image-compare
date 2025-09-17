@@ -94,91 +94,78 @@
     </style>
   </head>
   <body>
-    <header>
-      <nav class="container" aria-label="Main navigation">
-        <ul>
-          <li><strong>Image Compare Tool</strong></li>
-        </ul>
-      </nav>
-    </header>
+    <main class="container">
+      <header>
+        <h1>Image Compare Tool 🔍</h1>
+        <p>Compare two images side-by-side to detect visual differences.</p>
+        <p>
+          Upload before and after photos to analyse pixel changes, calculate
+          difference percentages, and generate downloadable overlay images
+          highlighting modifications.
+        </p>
+        <p>
+          Perfect for quality control, design reviews, and visual regression
+          testing. 👌
+        </p>
+      </header>
 
-    <main class="container" role="main">
-      <article>
-        <header>
-          <h1>Image Compare Tool</h1>
-          <p>
-            Compare two images side-by-side to detect visual differences. Upload
-            before and after photos to analyse pixel changes, calculate
-            difference percentages, and generate downloadable overlay images
-            highlighting modifications. Perfect for quality control, design
-            reviews, and visual regression testing.
-          </p>
-        </header>
+      <section aria-labelledby="upload-heading">
+        <h2 id="upload-heading">Upload Images</h2>
+        <form aria-label="Image comparison form">
+          <div>
+            <label for="before">Before Image:</label>
+            <input
+              type="file"
+              id="before"
+              accept="image/*"
+              required
+              aria-describedby="before-help"
+            />
+            <small id="before-help"
+              >Upload the original or reference image</small
+            >
+          </div>
+          <div>
+            <label for="after">After Image:</label>
+            <input
+              type="file"
+              id="after"
+              accept="image/*"
+              required
+              aria-describedby="after-help"
+            />
+            <small id="after-help"
+              >Upload the modified or comparison image</small
+            >
+          </div>
+          <button type="submit" id="compare">Compare Images</button>
+        </form>
+      </section>
 
-        <section aria-labelledby="upload-heading">
-          <h2 id="upload-heading">Upload Images</h2>
-          <form role="form" aria-label="Image comparison form">
-            <div>
-              <label for="before">Before Image:</label>
-              <input
-                type="file"
-                id="before"
-                accept="image/*"
-                required
-                aria-describedby="before-help"
-              />
-              <small id="before-help"
-                >Upload the original or reference image</small
-              >
-            </div>
-            <div>
-              <label for="after">After Image:</label>
-              <input
-                type="file"
-                id="after"
-                accept="image/*"
-                required
-                aria-describedby="after-help"
-              />
-              <small id="after-help"
-                >Upload the modified or comparison image</small
-              >
-            </div>
-            <button type="submit" id="compare">Compare Images</button>
-          </form>
-        </section>
-
-        <section
-          id="result"
-          style="display: none"
-          aria-labelledby="results-heading"
+      <section
+        id="result"
+        style="display: none"
+        aria-labelledby="results-heading"
+      >
+        <h2 id="results-heading">Comparison Results</h2>
+        <p id="percentage" aria-live="polite"></p>
+        <figure>
+          <canvas id="overlay" aria-label="Image difference overlay"></canvas>
+          <figcaption>Difference overlay (differences shown in red)</figcaption>
+        </figure>
+        <button
+          type="button"
+          id="download-overlay"
+          class="secondary"
+          aria-describedby="download-help"
         >
-          <header>
-            <h2 id="results-heading">Comparison Results</h2>
-          </header>
-          <p id="percentage" aria-live="polite"></p>
-          <figure>
-            <canvas id="overlay" aria-label="Image difference overlay"></canvas>
-            <figcaption>
-              Difference overlay (differences shown in red)
-            </figcaption>
-          </figure>
-          <button
-            type="button"
-            id="download-overlay"
-            class="secondary"
-            aria-describedby="download-help"
-          >
-            Download Overlay 💾
-          </button>
-          <small id="download-help"
-            >Save the overlay image to your device</small
-          >
-        </section>
-      </article>
+          Download Overlay 💾
+        </button>
+        <small id="download-help">Save the overlay image to your device</small>
+      </section>
     </main>
 
-    <footer class="container" role="contentinfo">
+    <footer class="container">
       <nav aria-label="Footer navigation">
         <ul>
           <li>
